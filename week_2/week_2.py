@@ -73,4 +73,8 @@ Name: Eli Jones, Phone: 687235292, Role: IT Specialist
 Name: Melody Daniels, Phone: 687235291, Role: Programmer
 Name: Charlie Rivera, Phone: 687235290, Role: Web Developer
 '''
-
+#Writing a csv file in python
+hosts = [["workstation.local", "192.168.25.46"], ["webserver.cloud", "10.2.5.6"]]
+with open('hosts.csv', 'w') as hosts_csv:
+...     writer = csv.writer(hosts_csv)
+...     writer.writerows(hosts)

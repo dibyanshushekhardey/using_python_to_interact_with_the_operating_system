@@ -59,4 +59,18 @@ websilte/index.html is a file
 website/favicon.ico is a file
 """
 
+import csv
+f = open("csv_file.txt") 
+csv_f = csv.reader(f) # it reads csv file f
+for row in csv_f:
+    name, phone, role = row
+    print("Name: {}, Phone: {}, Role: {}".format(name, phone, role))
+f.close()    
+'''
+Output--
+Name: Sabrine Green, Phone: 687235293, Role: System Administrator
+Name: Eli Jones, Phone: 687235292, Role: IT Specialist
+Name: Melody Daniels, Phone: 687235291, Role: Programmer
+Name: Charlie Rivera, Phone: 687235290, Role: Web Developer
+'''
 

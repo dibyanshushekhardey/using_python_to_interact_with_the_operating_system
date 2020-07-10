@@ -1,23 +1,21 @@
-'''
 with open("words1.txt") as file:
     for line in file:
         print(line.upper().strip())
-'''
 
-'''
+
 file = open("words1.txt")
 lines = file.readlines()
 file.close()
 lines.sort()
 print(lines)
-'''
 
-'''
+
+
 with open("novel.txt", "w") as file:
     file.write("It was a dark and stormy night")
-'''
 
-'''
+
+
 # os module imported
 >>>import os
 # to permanently remove the text file or any file
@@ -41,9 +39,9 @@ False
 datetime.datetime(2020, 6, 5, 17, 43, 8, 378510)
 >>>os.path.abspath('romeo.txt') # to get the absolute path of the text file
 'C:\\Users\\Hp\\PycharmProjects\\modules\\romeo.txt'
-'''
 
-'''
+
+
 import os
 os.listdir("website")
 dir = "website"
@@ -54,9 +52,11 @@ for name in os.lisdir(dir):
     else:
         print("{} is a file".format(fullname))
 
-"""Output:
+"""
+Output:
 website/images is a directory
 websilte/index.html is a file
-website/favicon.ico is a file"""
-'''
+website/favicon.ico is a file
+"""
+
 

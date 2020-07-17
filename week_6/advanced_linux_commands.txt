@@ -1,0 +1,218 @@
+~/mynewdir$ nano while.sh
+~/mynewdir$ chmod +x while.sh
+~/mynewdir$ cat while.sh
+n=1
+while [ $n -le 5 ]; do
+  echo "Iteration number $n"
+  ((n+=1))
+done
+~/mynewdir$ ./while.sh
+Iteration number 1
+Iteration number 2
+Iteration number 3
+Iteration number 4
+Iteration number 5
+~/mynewdir$ nano random_exit.py
+~/mynewdir$ cat random
+cat: random: No such file or directory
+~/mynewdir$ 
+~/mynewdir$ cat random_exit.py
+import sys
+import random
+
+value = random.randint(0, 3)
+print("Returning: " + str(value))
+sys.exit(value)
+
+~/mynewdir$ chmod +x random
+chmod: cannot access 'random': No such file or directory
+~/mynewdir$ chmod +x random_exit.py
+~/mynewdir$ ./random_exit.py
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./random_exit.py: line 4: syntax error near unexpected token `('
+./random_exit.py: line 4: `value = random.randint(0, 3)'
+~/mynewdir$ nano random_exit.py
+~/mynewdir$ ./random_exit.py
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./random_exit.py: line 4: syntax error near unexpected token `('
+./random_exit.py: line 4: `value=random.randint(0, 3)'
+~/mynewdir$ cat random_exit.py
+import sys
+import random
+
+value=random.randint(0, 3)
+print("Returning: " + str(value))
+sys.exit(value)
+
+~/mynewdir$ nano random_exit.py
+~/mynewdir$ ./random_exit.py
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./random_exit.py: line 4: syntax error near unexpected token `('
+./random_exit.py: line 4: `value=random.randint(0,3)'
+~/mynewdir$ dos2unix.exe random_exit.py
+bash: dos2unix.exe: command not found
+~/mynewdir$ ./random_exit.py
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./random_exit.py: line 4: syntax error near unexpected token `('
+./random_exit.py: line 4: `value=random.randint(0,3)'
+~/mynewdir$ nano random_exit.py
+~/mynewdir$ chmod +x random_exit.py
+~/mynewdir$ ./random_exit.py
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./random_exit.py: line 4: syntax error near unexpected token `('
+./random_exit.py: line 4: `value=random.randint(0,3)'
+~/mynewdir$ nano retry.sh
+~/mynewdir$ cat retry.sh
+n=0
+command=$1
+while ! $command && [ &n -le 5 ]; do
+  sleep $n
+  ((n=n+1))
+  echo "Retry #$n"
+done;
+~/mynewdir$ chmod +x retry.sh
+~/mynewdir$ ./retry.sh
+./retry.sh: line 3: n: command not found
+~/mynewdir$ ./retry.sh ./random_exit.py
+./retry.sh: line 3: n: command not found
+~/mynewdir$ import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./random_exit.py: line 4: syntax error near unexpected token `('
+./random_exit.py: line 4: `value=random.randint(0,3)'
+./retry.sh: line 3: [: missing `]'
+
+~/mynewdir$ sh -vx ./random_exit.py
+import sys
++ import sys
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import random
++ import random
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+
+value=random.randint(0,3)
+./random_exit.py: 4: ./random_exit.py: Syntax error: "(" unexpected
+~/mynewdir$ nano random_exit.py
+~/mynewdir$ ./random_exit.py
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./random_exit.py: line 4: syntax error near unexpected token `('
+./random_exit.py: line 4: `value=random.randint((0, 3))'
+~/mynewdir$ #for loops
+~/mynewdir$ nano fruits.sh
+~/mynewdir$ chmod +x fruits.sh
+~/mynewdir$ cat fruits.sh
+for fruit in peach orange apple; do
+        echo "I like $fruit!"
+done
+~/mynewdir$ ./fruits.sh
+I like peach!
+I like orange!
+I like apple!
+~/mynewdir$ ls -l
+total 13
+-rwxr-xr-x 1 user user  94 Jul 17 09:57 capitalize.py
+-rwxr-xr-x 1 user user 113 Jul 17 11:51 check_loaclhost.sh
+-rw-r--r-- 1 user user 188 Jul 17 09:36 error_file.txt
+-rwxr-xr-x 1 user user  64 Jul 17 12:37 fruits.sh
+-rw-r--r-- 1 user user  69 Jul 17 09:59 haiku.txt
+-rw-r--r-- 1 user user  35 Jul 17 09:37 myamazingfile.txt
+-rw-r--r-- 1 user user  42 Jul 17 09:46 new_file.txt
+-rwxr-xr-x 1 user user 106 Jul 17 12:26 random_exit.py
+-rwxr-xr-x 1 user user 100 Jul 17 12:19 retry.sh
+-rw-r--r-- 1 user user 192 Jul 17 09:52 spider.txt
+-rwxr-xr-x 1 user user  76 Jul 17 09:24 stdout_example.py
+-rwxr-xr-x 1 user user 168 Jul 17 09:33 streams_err.py
+-rwxr-xr-x 1 user user  72 Jul 17 12:02 while.sh
+~/mynewdir$ exit()
+> 
+> ls -l
+bash: syntax error near unexpected token `ls'
+~/mynewdir$ nano rename.sh
+~/mynewdir$ chmod +x rename.sh
+~/mynewdir$ nano about.htm
+~/mynewdir$ ./rename.sh
+mv *HTM *HTM.html
+~/mynewdir$ nano about.HTM
+~/mynewdir$ ./rename.sh
+mv about.HTM about.html
+~/mynewdir$ ./rename.sh
+mv about.HTM about.html
+~/mynewdir$ ls -l
+total 16
+-rw-r--r-- 1 user user   8 Jul 17 12:43 about.HTM
+-rw-r--r-- 1 user user  15 Jul 17 12:42 about.htm
+-rwxr-xr-x 1 user user  94 Jul 17 09:57 capitalize.py
+-rwxr-xr-x 1 user user 113 Jul 17 11:51 check_loaclhost.sh
+-rw-r--r-- 1 user user 188 Jul 17 09:36 error_file.txt
+-rwxr-xr-x 1 user user  64 Jul 17 12:37 fruits.sh
+-rw-r--r-- 1 user user  69 Jul 17 09:59 haiku.txt
+-rw-r--r-- 1 user user  35 Jul 17 09:37 myamazingfile.txt
+-rw-r--r-- 1 user user  42 Jul 17 09:46 new_file.txt
+-rwxr-xr-x 1 user user 106 Jul 17 12:26 random_exit.py
+-rwxr-xr-x 1 user user  88 Jul 17 12:42 rename.sh
+-rwxr-xr-x 1 user user 100 Jul 17 12:19 retry.sh
+-rw-r--r-- 1 user user 192 Jul 17 09:52 spider.txt
+-rwxr-xr-x 1 user user  76 Jul 17 09:24 stdout_example.py
+-rwxr-xr-x 1 user user 168 Jul 17 09:33 streams_err.py
+-rwxr-xr-x 1 user user  72 Jul 17 12:02 while.sh
+~/mynewdir$ tail /var/log/syslog
+tail: cannot open '/var/log/syslog' for reading: No such file or directory
+~/mynewdir$ echo *
+about.HTM about.htm capitalize.py check_loaclhost.sh error_file.txt fruits.sh haiku.txt myamazingfile.txt new_file.txt random_exit.py rename.sh retry.sh spider.txt stdout_example.py streams_err.py while.sh
+~/mynewdir$ tail /var/log/syslog | cut -d' ' -f5-
+tail: cannot open '/var/log/syslog' for reading: No such file or directory
+~/mynewdir$ nano capitalize_words.py
+~/mynewdir$ chmod +x capitalize_words.py
+~/mynewdir$ cat capitalize_words.py
+import sys
+
+for line in sys.stdin:
+  words = line.strip().split()
+  print(" ".join([word.capitalize() for word in words]))
+
+~/mynewdir$ cat spider.txt
+The itsy bitsy spider climbed up the waterspout.
+Down came the rain
+and washed the spider out.
+Out came the sun
+and dried up all the rain
+and the itsy bitsy spider climbed up the spout again.
+~/mynewdir$ cat spider.txt | ./capitalize_words.py
+import-im6.q16: unable to open X server `:0' @ error/import.c/ImportImageCommand/358.
+./capitalize_words.py: line 4: syntax error near unexpected token `words'
+./capitalize_words.py: line 4: `  words = line.strip().split()'
+~/mynewdir$ nano capitalize_words.py
+~/mynewdir$ cat spider.txt | ./capitalize_words.py
+The Itsy Bitsy Spider Climbed Up The Waterspout.
+Down Came The Rain
+And Washed The Spider Out.
+Out Came The Sun
+And Dried Up All The Rain
+And The Itsy Bitsy Spider Climbed Up The Spout Again.
+~/mynewdir$ nano random_exit.py
+~/mynewdir$ ./random_exit.py
+Traceback (most recent call last):
+  File "./random_exit.py", line 5, in <module>
+    value=random.randint((0, 3))
+TypeError: randint() missing 1 required positional argument: 'b'
+~/mynewdir$ nano random_exit.py
+~/mynewdir$ ./random_exit.py
+Traceback (most recent call last):
+  File "./random_exit.py", line 5, in <module>
+    value=random.randint(range(0, 3))
+TypeError: randint() missing 1 required positional argument: 'b'
+~/mynewdir$ cat random_exit.py
+#!/usr/bin/env python3
+import sys
+import random
+
+value=random.randint(range(0, 3))
+print("Returning: " + str(value))
+sys.exit(value)
+
+~

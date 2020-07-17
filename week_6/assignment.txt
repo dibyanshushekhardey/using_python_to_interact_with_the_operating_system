@@ -1,0 +1,94 @@
+student-00-8dc1b8feba6a@linux-instance:~$ cd data
+student-00-8dc1b8feba6a@linux-instance:~/data$ cat list.txt
+001 jane /data/jane_profile_07272018.doc
+002 kwood /data/kwood_profile_04022017.doc
+003 pchow /data/pchow_profile_05152019.doc
+004 janez /data/janez_profile_11042019.doc
+005 jane /data/jane_pic_07282018.jpg
+006 kwood /data/kwood_pic_04032017.jpg
+007 pchow /data/pchow_pic_05162019.jpg
+008 jane /data/jane_contact_07292018.csv
+009 kwood /data/kwood_contact_04042017.csv
+010 pchow /data/pchow_contact_05172019.csv
+student-00-8dc1b8feba6a@linux-instance:~/data$ ls
+jane_contact_07292018.csv  janez_profile_11042019.doc  kwood_profile_04022017.doc  pchow_pic_05162019.jpg
+jane_profile_07272018.doc  kwood_pic_04032017.jpg      list.txt
+student-00-8dc1b8feba6a@linux-instance:~/data$ grep 'jane' ../data/list.txt
+001 jane /data/jane_profile_07272018.doc
+004 janez /data/janez_profile_11042019.doc
+005 jane /data/jane_pic_07282018.jpg
+008 jane /data/jane_contact_07292018.csv
+student-00-8dc1b8feba6a@linux-instance:~/data$ grep ' jane ' ../data/list.txt
+001 jane /data/jane_profile_07272018.doc
+005 jane /data/jane_pic_07282018.jpg
+008 jane /data/jane_contact_07292018.csv
+student-00-8dc1b8feba6a@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f 1
+001
+005
+008
+student-00-8dc1b8feba6a@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f 2
+jane
+jane
+jane
+student-00-8dc1b8feba6a@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f 3
+/data/jane_profile_07272018.doc
+/data/jane_pic_07282018.jpg
+/data/jane_contact_07292018.csv
+student-00-8dc1b8feba6a@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f 1-3
+001 jane /data/jane_profile_07272018.doc
+005 jane /data/jane_pic_07282018.jpg
+008 jane /data/jane_contact_07292018.csv
+student-00-8dc1b8feba6a@linux-instance:~/data$ grep ' jane ' ../data/list.txt | cut -d ' ' -f 1,3
+001 /data/jane_profile_07272018.doc
+005 /data/jane_pic_07282018.jpg
+008 /data/jane_contact_07292018.csv
+student-00-8dc1b8feba6a@linux-instance:~/data$ test EXPRESSION
+student-00-8dc1b8feba6a@linux-instance:~/data$ if test -e ~/data/jane_profile_07272018.doc; then echo "File exists"; else echo "File doesn't exi                        st"; fi
+File exists
+student-00-8dc1b8feba6a@linux-instance:~/data$ > test.txt
+student-00-8dc1b8feba6a@linux-instance:~/data$ ls
+jane_contact_07292018.csv  janez_profile_11042019.doc  kwood_profile_04022017.doc  pchow_pic_05162019.jpg
+jane_profile_07272018.doc  kwood_pic_04032017.jpg      list.txt                    test.txt
+student-00-8dc1b8feba6a@linux-instance:~/data$ echo "I am appending text to this test file" >> test.txt
+student-00-8dc1b8feba6a@linux-instance:~/data$ cat test.txt
+I am appending text to this test file
+student-00-8dc1b8feba6a@linux-instance:~/data$ for i in 1 2 3; do echo $i; done
+1
+2
+3
+student-00-8dc1b8feba6a@linux-instance:~/data$ cd ~/scripts
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ nano findJane.sh
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ chmod +x findJane.sh
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ cat findJane.sh
+#!/bin/bash
+> oldFiles.txt
+files=$(grep " jane " ../data/list.txt | cut -d' ' -f3)
+for f in $files; do
+  if [ -e $HOME$f ]; then
+    echo $HOME$f >> oldFiles.txt;
+  fi
+done
+
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ ./findJane.sh
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ cat oldFiles.txt
+/home/student-00-8dc1b8feba6a/data/jane_profile_07272018.doc
+/home/student-00-8dc1b8feba6a/data/jane_contact_07292018.csv
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ nano changeJane.py
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ chmod +x changeJane.py
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ cat changeJane.py
+#!/usr/bin/env python3
+
+import sys
+import subprocess
+
+f = open(sys.argv[1], "r")
+for line in f.readlines():
+  old_name = line.strip()
+  new_name = old_name.replace("jane", "jdoe")
+  subprocess.run(["mv", old_name, new_name])
+f.close()
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ ./changeJane.py oldFiles.txt
+student-00-8dc1b8feba6a@linux-instance:~/scripts$ cd ~/data
+student-00-8dc1b8feba6a@linux-instance:~/data$ ls
+janez_profile_11042019.doc  jdoe_profile_07272018.doc  kwood_profile_04022017.doc  pchow_pic_05162019.jpg
+jdoe_contact_07292018.csv   kwood_pic_04032017.jpg     list.txt                    test.txt

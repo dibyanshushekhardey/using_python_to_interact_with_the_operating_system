@@ -1,0 +1,160 @@
+~$ mkdir mynewdir
+~$ cd mynewdir
+~/mynewdir$ pwd 
+/home/user/mynewdir
+~/mynewdir$ touch myfile.txt
+~/mynewdir$ ls -l
+total 1
+-rw-r--r-- 1 user user 0 Jul 17 08:19 myfile.txt
+~/mynewdir$ ls -la
+total 3
+drwxr-xr-x 2 user user  3 Jul 17 08:19 .
+drwxr-xr-x 7 user user 15 Jul 17 08:17 ..
+-rw-r--r-- 1 user user  0 Jul 17 08:19 myfile.txt
+~/mynewdir$ mv myfile.txt emptyfile.txt
+~/mynewdir$ ls -l
+total 1
+-rw-r--r-- 1 user user 0 Jul 17 08:19 emptyfile.txt
+~/mynewdir$ cd emptyfile.txt newfile.txt
+bash: cd: too many arguments
+~/mynewdir$ cp emptyfile.txt newfile.txt
+~/mynewdir$ ls -l
+total 1
+-rw-r--r-- 1 user user 0 Jul 17 08:19 emptyfile.txt
+-rw-r--r-- 1 user user 0 Jul 17 08:22 newfile.txt
+~/mynewdir$ rm *
+~/mynewdir$ ls - l
+ls: cannot access '-': No such file or directory
+ls: cannot access 'l': No such file or directory
+~/mynewdir$ ls -l
+total 0
+~/mynewdir$ cd ..
+~$ rmdir mynewdir/
+~$ ls mynewdir
+ls: cannot access 'mynewdir': No such file or directory
+~$ mkdir mynewdir
+~$ cd mynewdir
+~/mynewdir$ nano stdout_example.py
+~/mynewdir$ cat stdout_example.py
+#!/usr/bin/env python3
+
+print("Don't mind me, just a bit of text here...")
+
+~/mynewdir$ ./stdout_example.py
+bash: ./stdout_example.py: Permission denied
+~/mynewdir$ ls -l
+total 1
+-rw-r--r-- 1 user user 76 Jul 17 09:24 stdout_example.py
+~/mynewdir$ ls -l stdout_example.py
+-rw-r--r-- 1 user user 76 Jul 17 09:24 stdout_example.py
+~/mynewdir$ chmod +x stdout_example.py
+~/mynewdir$ ./stdout_example.py
+Don't mind me, just a bit of text here...
+~/mynewdir$ ./stdout_example.py > new_file.txt
+~/mynewdir$ cat newfile.txt
+cat: newfile.txt: No such file or directory
+~/mynewdir$ cat new_file.txt
+Don't mind me, just a bit of text here...
+~/mynewdir$ ./stdout_example.py >> new_file.txt
+~/mynewdir$ cat new_file.txt
+Don't mind me, just a bit of text here...
+Don't mind me, just a bit of text here...
+~/mynewdir$ nano streams_err.py
+~/mynewdir$ cat streams_err.py
+#!/usr/bin/env python3
+
+data = input("This will come from STDIN: ")
+print("Now we write it to STDOUT: " + data)
+raise ValueError("Now we generate an error to STDERR")
+
+~/mynewdir$ chmod +x streams_err.py
+~/mynewdir$ ./streams_err.py < new_file.txt
+This will come from STDIN: Now we write it to STDOUT: Don't mind me, just a bit of text here...
+Traceback (most recent call last):
+  File "./streams_err.py", line 5, in <module>
+    raise ValueError("Now we generate an error to STDERR")
+ValueError: Now we generate an error to STDERR
+~/mynewdir$ ./streams_err.py < new_file.txt 2> error_file.txt
+This will come from STDIN: Now we write it to STDOUT: Don't mind me, just a bit of text here...
+~/mynewdir$ cat error_file.txt
+Traceback (most recent call last):
+  File "./streams_err.py", line 5, in <module>
+    raise ValueError("Now we generate an error to STDERR")
+ValueError: Now we generate an error to STDERR
+~/mynewdir$ echo "These are the contents of the file" > myamazingfile.txt
+~/mynewdir$ cat myamazingfile.txt
+These are the contents of the file
+~/mynewdir$ ls -l 
+total 5
+-rw-r--r-- 1 user user 188 Jul 17 09:36 error_file.txt
+-rw-r--r-- 1 user user  35 Jul 17 09:37 myamazingfile.txt
+-rw-r--r-- 1 user user  84 Jul 17 09:31 new_file.txt
+-rwxr-xr-x 1 user user  76 Jul 17 09:24 stdout_example.py
+-rwxr-xr-x 1 user user 168 Jul 17 09:33 streams_err.py
+~/mynewdir$ #Redirection
+~/mynewdir$ cat stdout_example.py
+#!/usr/bin/env python3
+
+print("Don't mind me, just a bit of text here...")
+
+~/mynewdir$ ./stdout_example.py
+Don't mind me, just a bit of text here...
+~/mynewdir$ ./stdout_example.py > new_file.txt
+~/mynewdir$ cat new_file.txt
+Don't mind me, just a bit of text here...
+~/mynewdir$ #each time redirection is performed
+~/mynewdir$ #the destination is overwritten 
+~/mynewdir$ #piping
+~/mynewdir$ ls -l |less
+~/mynewdir$ ls -l |less
+~/mynewdir$ nano spider.txt
+~/mynewdir$ cat spider.txt
+The itsy bitsy spider climbed up the waterspout.
+Down came the rain
+and washed the spider out.
+Out came the sun
+and dried up all the rain
+and the itsy bitsy spider climbed up the spout again.
+~/mynewdir$ cat spider.txt | tr '''\n' | sort | uniq -c | sort -nr | head
+tr: missing operand after ‘\\n’
+Two strings must be given when translating.
+Try 'tr --help' for more information.
+~/mynewdir$ cat spider.txt | tr ' ' '\n' | sort | uniq -c | sort -nr | head
+      7 the
+      3 up
+      3 spider
+      3 and
+      2 rain
+      2 itsy
+      2 climbed
+      2 came
+      2 bitsy
+      1 waterspout.
+~/mynewdir$ nano capitalize.py
+~/mynewdir$ chmod +x capitalize.py
+~/mynewdir$ nano haiku.txt
+~/mynewdir$ cat haiku.txt
+advance your career, 
+automating with Python, 
+it's so fun to learn
+
+~/mynewdir$ cat haiku.txt | ./capitalize.py
+Advance your career,
+Automating with python,
+It's so fun to learn
+
+~/mynewdir$ ./capitalize.py < haiku.txt
+Advance your career,
+Automating with python,
+It's so fun to learn
+
+~/mynewdir$ ping www.example.com
+PING www.example.com (93.184.216.34) 56(84) bytes of data.
+^C
+--- www.example.com ping statistics ---
+21 packets transmitted, 0 received, 100% packet loss, time 20481ms
+
+~/mynewdir$ ping www.example.com
+PING www.example.com (93.184.216.34) 56(84) bytes of data.
+^Z
+[1]+  Stopped                 ping www.example.com

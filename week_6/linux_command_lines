@@ -1,0 +1,34 @@
+~$ mkdir mynewdir
+~$ cd mynewdir
+~/mynewdir$ pwd 
+/home/user/mynewdir
+~/mynewdir$ touch myfile.txt
+~/mynewdir$ ls -l
+total 1
+-rw-r--r-- 1 user user 0 Jul 17 08:19 myfile.txt
+~/mynewdir$ ls -la
+total 3
+drwxr-xr-x 2 user user  3 Jul 17 08:19 .
+drwxr-xr-x 7 user user 15 Jul 17 08:17 ..
+-rw-r--r-- 1 user user  0 Jul 17 08:19 myfile.txt
+~/mynewdir$ mv myfile.txt emptyfile.txt
+~/mynewdir$ ls -l
+total 1
+-rw-r--r-- 1 user user 0 Jul 17 08:19 emptyfile.txt
+~/mynewdir$ cd emptyfile.txt newfile.txt
+bash: cd: too many arguments
+~/mynewdir$ cp emptyfile.txt newfile.txt
+~/mynewdir$ ls -l
+total 1
+-rw-r--r-- 1 user user 0 Jul 17 08:19 emptyfile.txt
+-rw-r--r-- 1 user user 0 Jul 17 08:22 newfile.txt
+~/mynewdir$ rm *
+~/mynewdir$ ls - l
+ls: cannot access '-': No such file or directory
+ls: cannot access 'l': No such file or directory
+~/mynewdir$ ls -l
+total 0
+~/mynewdir$ cd ..
+~$ rmdir mynewdir/
+~$ ls mynewdir
+ls: cannot access 'mynewdir': No such file or directory

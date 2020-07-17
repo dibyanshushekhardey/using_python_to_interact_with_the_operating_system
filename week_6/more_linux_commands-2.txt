@@ -1,0 +1,129 @@
+~$ nano gather_info.sh
+~$ 
+~$ ./gather_info.sh
+bash: ./gather_info.sh: Permission denied
+~$ chmod +x gather_info.sh
+~$ ./gather_info.sh
+Starting at: Fri Jul 17 11:36:39 UTC 2020
+
+./gather_info.sh: line 4: echoUPTIME: command not found
+ 11:36:39 up  7:26,  0 users,  load average: 1.87, 2.70, 2.44
+
+FREE
+              total        used        free      shared  buff/cache   available
+Mem:       26747524     4617656     1064716        4588    21065152    19944064
+Swap:             0           0           0
+
+WHO
+
+Finishing at: Fri Jul 17 11:36:39 UTC 2020
+~$ cat gather_info.sh
+echo "Starting at: $(date)"
+echo
+
+echo"UPTIME"
+uptime
+echo
+
+echo "FREE"
+free
+echo
+
+echo "WHO"
+who
+echo
+
+echo "Finishing at: $(date)"
+
+~$ nano gather_info.sh
+~$ cat gather_info.sh
+echo "Starting at: $(date)";echo
+
+echo"UPTIME";uptime;echo
+
+echo "FREE";free;echo
+
+echo "WHO";who;echo
+
+echo "Finishing at: $(date)"
+
+~$ ./gather_info.sh
+Starting at: Fri Jul 17 11:38:29 UTC 2020
+
+./gather_info.sh: line 3: echoUPTIME: command not found
+ 11:38:29 up  7:28,  0 users,  load average: 2.35, 2.44, 2.37
+
+FREE
+              total        used        free      shared  buff/cache   available
+Mem:       26747524     4460660     1194572        4412    21092292    20104336
+Swap:             0           0           0
+
+WHO
+
+Finishing at: Fri Jul 17 11:38:29 UTC 2020
+~$ example=hello
+~$ echo $example
+hello
+~$ #no space betwen the variable and equal sign
+~$ nano gather_info.sh
+~$ ./gather_info.sh
+bash: ./gather_info.sh: /bin/trash: bad interpreter: No such file or directory
+~$ chmod +x gather_info.sh
+~$ ./gather_info.sh
+bash: ./gather_info.sh: /bin/trash: bad interpreter: No such file or directory
+~$ nano gather_info.sh
+~$ ./gather_info.sh
+Starting at: Fri Jul 17 11:43:45 UTC 2020
+----------------------
+./gather_info.sh: line 5: echoUPTIME: command not found
+ 11:43:45 up  7:33,  0 users,  load average: 4.35, 3.24, 2.71
+----------------------
+FREE
+              total        used        free      shared  buff/cache   available
+Mem:       26747524     4676460     1385156        4932    20685908    19896996
+Swap:             0           0           0
+----------------------
+WHO
+----------------------
+Finishing at: Fri Jul 17 11:43:45 UTC 2020
+~$ #globs- chars alloowing list of files
+~$ ls -l
+total 3
+-rw-r--r-- 1 user user   0 Jul 17 11:19 'Welcome to CoCalc.term'
+-rwxr-xr-x 1 user user 190 Jul 17 11:43  gather_info.sh
+drwxr-xr-x 2 user user  10 Jul 17 09:59  mynewdir
+~$ echo *.py
+*.py
+~$ echo c*
+c*
+~$ echo g*
+gather_info.sh
+~$ echo *
+Welcome to CoCalc.term gather_info.sh mynewdir
+~$ cd mynewdir
+~/mynewdir$ gather_info.sh < mynewdir
+bash: mynewdir: No such file or directory
+~/mynewdir$ echo *py
+capitalize.py stdout_example.py streams_err.py
+~/mynewdir$ echo c*
+capitalize.py
+~/mynewdir$ echo *
+capitalize.py error_file.txt haiku.txt myamazingfile.txt new_file.txt spider.txt stdout_example.py streams_err.py
+~/mynewdir$ echo ?????.py
+?????.py
+~/mynewdir$ nano check_loaclhost.sh
+~/mynewdir$ cat check_loaclhost.sh
+if grep "127.0.0.1" /etc/hosts; then
+        echo "Everything OK"
+else
+        echo "ERROR! 127.0.0.1 is not in /etc/hosts"
+fi
+~/mynewdir$ chmod +x check_loaclhost.sh
+~/mynewdir$ ./check_loaclhost.sh
+127.0.0.1       localhost
+Everything OK
+~/mynewdir$ if test -n "$PATH"; then echo "Your path is not empty"; fi
+Your path is not empty
+~/mynewdir$ if [ -n "$PATH" ]; then echo "Your path is not empty"; fi
+Your path is not empty
+~/mynewdir$ #use of spaces in the above codes bracket is necessary
